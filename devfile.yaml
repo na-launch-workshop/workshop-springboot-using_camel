@@ -1,0 +1,57 @@
+schemaVersion: 2.2.2
+metadata:
+  name: workshop-springboot-using_camel
+  version: 1.0.0
+  description: DevSpaces workspace for Spring Boot Camel app
+attributes:
+  che-editor: vscode
+components:
+  - name: tools
+    container:
+      image: image-registry.openshift-image-registry.svc:5000/openshift/udi-rhel9:latest
+      env:
+        - name: SERVER_ADDRESS
+          value: 0.0.0.0
+      endpoints:
+        - exposure: none
+          name: debug
+          protocol: tcp
+          targetPort: 5005
+        - exposure: public
+          name: camel-route
+          protocol: https
+          targetPort: 8080
+          path: /process
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
+      cpuLimit: '4'
+      cpuRequest: '500m'
+      memoryLimit: '6Gi'
+      memoryRequest: '2Gi'
+      mountSources: true
+  - name: m2
+    volume:
+      size: 1G
+
+commands:
+  - id: package
+    exec:
+      label: "Package Application"
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: "mvn package"
+      group:
+        kind: build
+        isDefault: true
+
+  - id: startdev
+    exec:
+      label: "Start Development mode"
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: "mvn spring-boot:run"
+      group:
+        kind: run
+        isDefault: true
+
