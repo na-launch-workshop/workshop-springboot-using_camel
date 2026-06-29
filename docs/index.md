@@ -1,5 +1,7 @@
 # 🚀 **Module: Event-Driven Microservices with Camel & Spring Boot**
 
+Build a Spring Boot microservice that consumes/produces messages using Camel Kafka.
+
 **Technology Stack:** 
 
 - Spring Boot

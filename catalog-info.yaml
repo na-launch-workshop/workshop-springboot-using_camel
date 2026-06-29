@@ -2,9 +2,9 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: workshop-springboot-using_camel
-  title: Event-Driven Integration with Camel & Spring Boot
+  title: Event-Driven Microservices
   description: |
-    Event-Driven Microservices with Camel & Spring Boot
+    Build Event-Driven Microservices with Camel & Spring Boot
   annotations:
     backstage.io/kubernetes-id: workshop-springboot-using_camel
     backstage.io/kubernetes-namespace: developers-devspaces
